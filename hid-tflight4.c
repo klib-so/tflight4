@@ -12,7 +12,8 @@
 #include <linux/kernel.h>
 
 #define USB_VENDOR_ID_THRUSTMASTER 0x044f
-#define USB_DEVICE_ID_THRUSTMASTER_TFLIGHT4 0xb67b
+#define USB_DEVICE_ID_THRUSTMASTER_TFLIGHT4 0xb67c
+
 /*
 static u8 orig_rdesc[] = {
 0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
