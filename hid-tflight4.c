@@ -226,7 +226,7 @@ module_param(throttle_seesaw_extra_axis, int, 0664);
 MODULE_PARM_DESC(throttle_seesaw_extra_axis, "Assign stick twist to a Z axis, unlocking throttle seesaw as a separate Rz axis. Default is 0 (off), which matches proprietary driver. Set to 1 to enable.");
 
 
-static __u8 *tflight_report_fixup(struct hid_device *hdev,
+static const __u8 *tflight_report_fixup(struct hid_device *hdev,
                                       __u8 *rdesc,
                                       unsigned int *rsize)
 {
