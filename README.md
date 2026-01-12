@@ -1,29 +1,46 @@
 # tflight4
-Linux Kernel HID Module for Thrustmaster T.Flight HOTAS 4 Joystick (Device ID: b67c).
+Linux Kernel HID Module for Thrustmaster T.Flight HOTAS 4 Joystick.
 
-The joystick's HID Report Descriptor does not provide a mappingn for the throttle, stick twist, or throttle paddles. This driver replaces the HID report descriptor with one that (hopefully works)
+The joystick's HID Report Descriptor does not provide a mapping for the throttle, stick twist, or throttle paddles.
+This driver replaces the HID report descriptor with one that (hopefully works).
 
 All credit goes to the original [authors](https://github.com/walterschell/tflight4).
 
-Forking because there seems to have been a hardware update causing the device ID to increment from b67b to b67c, so the driver won't recognise the newer devices. Simply udating the ID let the device be recognised, but the mappings were all over the place,
-so looks like will have to be redone.
+Forking because I want to incorporate both modes, the default mode with device ID 044f:b67b (red light) and the usb mode
+with device ID 044f:b67c (green light), to map them to sane defaults.
 
-The base descriptor seems almost perfect on the new hardware, except the throttle paddle is not getting mapped, and I like the idea of mapping those buttons separately, as per the `throttle_seesaw_extra_axis=1` option.
+The descriptor still seems to be missing some inputs, at least for me, and others are getting mapped to inappropriate
+locations as far as I can tell.
+
+### Note
+The usb (green light) mode is achieved by plugging in the device with the three buttons on the base of the throttle
+pressed.
 
 # WARNING
 
-This project is currently pre-alpha, so although the module will hopefully build and install on your machine, the results will almost certainly not be what you want. 
+This project is currently pre-alpha, so although the module will hopefully build and install on your machine, the
+results will almost certainly not be what you want.
+
+Releases will be unstable or broken during 0.1.x, but will hopefully improve thereafter, then the v1.0
+release will be considered finished when both modes are supported with mappings to some subjectively reasonable
+defaults.
 
 # Development
 
-The plan is to relaease a working version for b67c, and then ideally to go back and incorporate the b67b mappings and have the module choose the correct one.
+The plan is to release a working version for usb mode, and then ideally to go back and incorporate the red light 
+mappings and have the module choose the correct one when it is discovered.
 
 All help is appreciated, so go ahead and open up an issue, then add a PR if you have a solution.
+
+Also, it would be nice to get some sort of high level testing in place in the near future, so feel free to submit some
+tests if that's your jam.
 
 
 # How to Use (manually)
 
-Install whatever package your distro requires for compiling C. On ubuntu this is `build-essential`. 
+Install whatever package your distro requires for compiling C. ~~On ubuntu this is `build-essential`.~~
+
+    pacman -S base-devel
 
 Now build the module:
 
@@ -33,7 +50,8 @@ Load the module into the current running kernel to test it out for your use. A r
 
     insmod hid-tflight4.ko
 
-If it works well for you, then install it and set it up to be loaded at boot. After this next step, a reboot will not undo this change:
+If it works well for you, then install it and set it up to be loaded at boot. After this next step, a reboot will not
+undo this change:
 
     sudo cp hid-tflight4.ko /lib/modules/$(uname -r)/kernel/drivers/hid/ \
       && sudo depmod \
