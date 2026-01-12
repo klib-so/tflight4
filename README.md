@@ -71,8 +71,8 @@ The following list should do it:
 ```
 ~$ sudo -i
 ~# cd /usr/src
-~# git clone https://github.com/walterschell/tflight4.git tflight4-1.0
-~# dkms install tflight4/1.0
+~# git clone https://github.com/klib-so/tflight4.git tflight4-0.1.0
+~# dkms install tflight4/0.1.0
 ```
 
 # Enable twist and seesaw axis separation
@@ -83,6 +83,3 @@ Add configuration to the modprobe.d:
 ~$ sudo -i
 ~# echo 'options hid-tflight4 throttle_seesaw_extra_axis=1' > /etc/modprobe.d/80-tflight4.conf
 ```
-
-# TODO
-Need to test if the optional foot rudders are correctly supported.
